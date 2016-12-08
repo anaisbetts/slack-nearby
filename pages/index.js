@@ -59,8 +59,12 @@ export default class TheApp extends React.Component {
       args.dm = this.props.query.dm;
     }
 
+    const buttonText = this.props.query.dm ?
+      `Click to DM @${this.props.query.name}` :
+      `Click to join #{this.props.query.name}`;
+
     const content = this.props.query.team ?
-      <OpenSlackButton {...args}>Click to join #{this.props.query.name}</OpenSlackButton> :
+      <OpenSlackButton {...args}>{buttonText}</OpenSlackButton> :
       <div className={helpStyle}>
         Hi! This is a website that helps you create Physical Web beacon landing pages. Talk to @paulcbetts for more info.
       </div>
