@@ -12,18 +12,18 @@ export default class extends React.Component {
 
   render() {
     const style = css({
-      'letter-spacing': 0,
-      'font-size': '1.126rem',
+      letterSpacing: 0,
+      fontSize: '1.126rem',
       margin: 0,
-      'line-height': '3rem',
+      lineHeight: '3rem',
       padding: '16px',
       cursor: 'pointer',
       display: 'inline-block',
-      'font-family': 'Slack-Lato, sans-serif',
-      'font-weight': 'bold',
-      'text-decoration': 'none',
+      fontFamily: 'Slack-Lato, sans-serif',
+      fontWeight: 'bold',
+      textDecoration: 'none',
       border: '1px solid #56B68B',
-      'border-radius': '4px',
+      borderRadius: '4px',
       background: '#56B68B',
       color: '#fff',
     });

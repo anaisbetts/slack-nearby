@@ -1,7 +1,7 @@
-import react from 'react';
+import React from 'react';
 import css from 'next/css';
-import {head} from '../components/default-page';
 
+import {head} from '../components/default-page';
 import OpenSlackButton from '../components/open-slack-button';
 
 const logoStyle = css({
@@ -30,15 +30,49 @@ const buttonStyle = css({
   flex: '0 1 auto',
 });
 
-export default () =>  {
-  const theHead = head();
-  return <div className={containerStyle}>
-    {theHead}
+const helpStyle = css({
+  letterSpacing: 0,
+  fontSize: '1.126rem',
+  margin: 0,
+  padding: '16px',
+  cursor: 'pointer',
+  display: 'inline-block',
+  fontFamily: 'Slack-Lato, sans-serif',
+  fontWeight: 'normal',
+});
 
-    <img src="/static/slack.png" className={logoStyle}></img>
+export default class TheApp extends React.Component {
+  static async getInitialProps({query}) {
+    return { query };
+  }
 
-    <div className={buttonStyle}>
-      <OpenSlackButton team='T024BE7LD' channel='C02BNG9V9'>Click to join #android-team</OpenSlackButton>
-    </div>
-  </div>;
+  render() {
+    const theHead = head();
+
+    let args = {
+      team: this.props.query.team,
+    }
+
+    if (this.props.query.channel) {
+      args.channel = this.props.query.channel;
+    } else {
+      args.dm = this.props.query.dm;
+    }
+
+    const content = this.props.query.team ?
+      <OpenSlackButton {...args}>Click to join #{this.props.query.name}</OpenSlackButton> :
+      <div className={helpStyle}>
+        Hi! This is a website that helps you create Physical Web beacon landing pages. Talk to @paulcbetts for more info.
+      </div>
+
+    return <div className={containerStyle}>
+      {theHead}
+
+      <img src="/static/slack.png" className={logoStyle}></img>
+
+      <div className={buttonStyle}>
+        {content}
+      </div>
+    </div>;
+  }
 }
