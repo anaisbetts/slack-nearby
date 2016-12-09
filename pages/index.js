@@ -59,9 +59,9 @@ export default class TheApp extends React.Component {
       args.dm = this.props.query.dm;
     }
 
-    const buttonText = this.props.query.text || this.props.query.dm ?
+    const buttonText = this.props.query.text || (this.props.query.dm ?
       `Click to DM @${this.props.query.name}` :
-      `Click to join #${this.props.query.name}`;
+      `Click to join #${this.props.query.name}`);
 
     const content = this.props.query.team ?
       <OpenSlackButton {...args}>{buttonText}</OpenSlackButton> :
